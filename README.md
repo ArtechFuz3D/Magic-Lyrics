@@ -5,6 +5,6 @@
 ![preview](./preview.png)
 
 ## Guide
-To save and re open your lyrics, save the file using .mg extension, this will ensure the formatting is preserved.
+To save and re open your lyrics, save the file using .mag extension, this will ensure the formatting is preserved.
 
 Sample '.mag' file extension lyrics file included, accepts txt and markdown too
