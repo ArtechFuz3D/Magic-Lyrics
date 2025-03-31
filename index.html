@@ -813,7 +813,8 @@
           );
           return;
         }
-        const statusIndicator = document.getElementById("statusIndicator"); // Grab it here
+
+        const statusIndicator = document.getElementById("statusIndicator");
 
         if (!scrolling) {
           if (
@@ -829,8 +830,8 @@
           scrollButton.style.background =
             "linear-gradient(45deg, #FF6B6B, #FF8E53)";
           scrollIndicator.style.display = "flex";
-          statusIndicator.textContent = "Scrolling"; // Change text
-          statusIndicator.classList.add("scrolling"); // Add gradient class
+          statusIndicator.textContent = "Scrolling";
+          statusIndicator.classList.add("scrolling");
           startScroll();
           scrolling = true;
         } else {
@@ -838,36 +839,49 @@
           scrollButton.textContent = "Play Scroll";
           scrollButton.style.background = "";
           scrollIndicator.style.display = "none";
-          statusIndicator.textContent = "Ready"; // Back to "Ready"
-          statusIndicator.classList.remove("scrolling"); // Remove gradient class
+          statusIndicator.textContent = "Ready";
+          statusIndicator.classList.remove("scrolling");
           stopScroll();
           scrolling = false;
         }
       }
 
-      // Start scrolling with integer speeds
+      // Start scrolling with smooth, slower motion
       function startScroll() {
-        const speed = parseInt(document.getElementById("scrollSpeed").value); // Back to integers
+        const baseSpeed = parseInt(
+          document.getElementById("scrollSpeed").value
+        ); // 1, 2, 3, 4
         stopScroll(); // Clear any existing interval
-        console.log("startScroll called with speed:", speed);
+        console.log("startScroll called with baseSpeed:", baseSpeed);
+
+        let scrollAccumulator = 0; // Track fractional pixels
+        const speedFactor = 0.1; // Base speed multiplier (adjustable)
 
         scrollInterval = setInterval(() => {
-          console.log(
-            "Scrolling... scrollTop:",
-            lyricsBox.scrollTop,
-            "scrollHeight:",
-            lyricsBox.scrollHeight
-          );
-          lyricsBox.scrollTop += speed; // Integer increments: 1, 2, 3, 4
+          const speed = baseSpeed * speedFactor; // Fractional speed (e.g., 0.25, 0.5, 0.75, 1)
+          scrollAccumulator += speed; // Add fractional increment
 
-          if (
-            lyricsBox.scrollTop >=
-            lyricsBox.scrollHeight - lyricsBox.clientHeight - 10
-          ) {
-            lyricsBox.scrollTop = 0;
-            console.log("Reset to top");
+          // Only update scrollTop when we hit a whole pixel
+          const pixelsToMove = Math.floor(scrollAccumulator);
+          if (pixelsToMove >= 1) {
+            lyricsBox.scrollTop += pixelsToMove;
+            scrollAccumulator -= pixelsToMove; // Subtract the used pixels
+            console.log(
+              "Scrolling... scrollTop:",
+              lyricsBox.scrollTop,
+              "scrollHeight:",
+              lyricsBox.scrollHeight
+            );
+
+            if (
+              lyricsBox.scrollTop >=
+              lyricsBox.scrollHeight - lyricsBox.clientHeight - 10
+            ) {
+              lyricsBox.scrollTop = 0;
+              console.log("Reset to top");
+            }
           }
-        }, 50); // 50ms interval for smooth scrolling
+        }, 15); // 15ms interval for smoothness
       }
 
       // Stop scrolling
