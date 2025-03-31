@@ -42,6 +42,7 @@
         --bg-mid: #3d2b6b;
         --bg-light: #2e1f5b;
         --text-light: #e0e0e0;
+        --text-dark: #0e0e0e;
         --glass-bg: rgba(255, 255, 255, 0.1);
         --shadow-glow: rgba(153, 102, 255, 0.5);
         --panel-width: 250px;
@@ -78,8 +79,8 @@
       }
 
       .container {
-        max-width: 1300px;
-        margin: 100px auto 0; /* Reduced bottom margin */
+        max-width: 1500px;
+        margin: 70px auto 0; /* Reduced bottom margin */
         background: var(--glass-bg);
         padding: 25px;
         border-radius: 25px;
@@ -111,12 +112,12 @@
 
       .title-wrapper {
         position: absolute;
-        top: -70px;
+        top: -65px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
         background: rgba(153, 102, 255, 0.3);
-        padding: 15px 30px;
+        padding: 5px 30px;
         border-radius: 15px;
         clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
         box-shadow: 0 0 30px rgba(255, 102, 204, 0.6);
@@ -328,7 +329,7 @@
       }
 
       input[type="text"] {
-        width: 100%;
+        /* width: 100%; */
         height: var(--button-height);
         padding: 0 15px;
         border: none;
@@ -562,6 +563,24 @@
         color: white;
       }
 
+      #statusIndicator {
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9em;
+        background-color: chartreuse; /* Default "Ready" state */
+        color: var(--text-dark);
+        transition: background 0.3s ease; /* Smooth transition */
+      }
+
+      #statusIndicator.scrolling {
+        background: linear-gradient(
+          45deg,
+          chartreuse,
+          #9966ff
+        ); /* Green to purple */
+        color: #fff; /* White text for contrast */
+      }
+
       @media (max-width: 1100px) {
         .container {
           flex-direction: column;
@@ -767,7 +786,6 @@
       </a>
     </div>
 
-
     <script>
       let scrolling = false;
       let scrollInterval;
@@ -795,6 +813,7 @@
           );
           return;
         }
+        const statusIndicator = document.getElementById("statusIndicator"); // Grab it here
 
         if (!scrolling) {
           if (
@@ -810,6 +829,8 @@
           scrollButton.style.background =
             "linear-gradient(45deg, #FF6B6B, #FF8E53)";
           scrollIndicator.style.display = "flex";
+          statusIndicator.textContent = "Scrolling"; // Change text
+          statusIndicator.classList.add("scrolling"); // Add gradient class
           startScroll();
           scrolling = true;
         } else {
@@ -817,6 +838,8 @@
           scrollButton.textContent = "Play Scroll";
           scrollButton.style.background = "";
           scrollIndicator.style.display = "none";
+          statusIndicator.textContent = "Ready"; // Back to "Ready"
+          statusIndicator.classList.remove("scrolling"); // Remove gradient class
           stopScroll();
           scrolling = false;
         }
