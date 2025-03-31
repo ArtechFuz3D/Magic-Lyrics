@@ -3,6 +3,7 @@
 ### Scroll through your favorite song lyrics effortlessly with this auto-scrolling tool!
 
 ![preview](./previewv2.png)
+<!-- ![preview](./previewv2.png) -->
 
 ## Guide
 To save and re open your lyrics, save the file using .mag extension, this will ensure the formatting is preserved.
