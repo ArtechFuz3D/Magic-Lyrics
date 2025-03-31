@@ -34,102 +34,166 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Righteous&family=Quicksand:wght@400;700&display=swap");
 
+      :root {
+        --primary: #9966ff;
+        --secondary: #ff66cc;
+        --accent: #33ccff;
+        --bg-dark: #1a0b2e;
+        --bg-mid: #3d2b6b;
+        --bg-light: #2e1f5b;
+        --text-light: #e0e0e0;
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --shadow-glow: rgba(153, 102, 255, 0.5);
+        --panel-width: 250px;
+        --button-height: 38px;
+      }
+
       body {
-        background: linear-gradient(135deg, #1a0b2e, #3d2b6b, #2e1f5b);
+        background: linear-gradient(
+          135deg,
+          var(--bg-dark),
+          var(--bg-mid),
+          var(--bg-light)
+        );
         background-size: 400% 400%;
         animation: gradientBG 12s ease infinite;
         font-family: "Quicksand", sans-serif;
-        color: #e0e0e0;
+        color: var(--text-light);
         margin: 0;
-        padding: 40px;
-        min-height: 100vh;
-        overflow: hidden;
+        padding: 0;
+        height: 100vh;
+        overflow: hidden; /* Prevent page overflow */
       }
 
       @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       .container {
-        max-width: 900px;
-        margin: 120px auto 0;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 80px 30px 30px 30px;
+        max-width: 1300px;
+        margin: 100px auto 0; /* Reduced bottom margin */
+        background: var(--glass-bg);
+        padding: 25px;
         border-radius: 25px;
-        box-shadow: 0 0 40px rgba(153, 102, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 40px var(--shadow-glow),
+          inset 0 0 15px rgba(255, 255, 255, 0.2);
         position: relative;
         animation: pulse 4s ease-in-out infinite;
+        backdrop-filter: blur(5px);
+        display: flex;
+        gap: 20px;
+        height: calc(100vh - 150px); /* Fit within viewport */
+        align-items: stretch;
       }
 
       @keyframes pulse {
-        0% { box-shadow: 0 0 40px rgba(153, 102, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2); }
-        50% { box-shadow: 0 0 60px rgba(153, 102, 255, 0.8), inset 0 0 25px rgba(255, 255, 255, 0.3); }
-        100% { box-shadow: 0 0 40px rgba(153, 102, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2); }
+        0% {
+          box-shadow: 0 0 40px var(--shadow-glow),
+            inset 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 60px rgba(153, 102, 255, 0.8),
+            inset 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 40px var(--shadow-glow),
+            inset 0 0 15px rgba(255, 255, 255, 0.2);
+        }
       }
 
       .title-wrapper {
         position: absolute;
-        top: -100px;
+        top: -70px;
         left: 50%;
         transform: translateX(-50%);
         text-align: center;
-        background: rgba(153, 102, 255, 0.2);
+        background: rgba(153, 102, 255, 0.3);
         padding: 15px 30px;
         border-radius: 15px;
         clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%);
         box-shadow: 0 0 30px rgba(255, 102, 204, 0.6);
         animation: hover 2s ease-in-out infinite;
+        backdrop-filter: blur(10px);
+        width: 280px;
+        z-index: 10;
       }
 
       @keyframes hover {
-        0% { transform: translateX(-50%) translateY(0); }
-        50% { transform: translateX(-50%) translateY(-5px); }
-        100% { transform: translateX(-50%) translateY(0); }
+        0% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
       }
 
       #foximg {
         width: 40px;
         height: 40px;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
         filter: drop-shadow(0 0 8px rgba(255, 153, 204, 0.7));
+        transition: transform 0.3s ease;
+      }
+
+      #foximg:hover {
+        transform: rotate(15deg);
       }
 
       h1 {
         color: #fff;
-        background: linear-gradient(45deg, #ff66cc, #9966ff, #33ccff);
+        background: linear-gradient(
+          45deg,
+          var(--secondary),
+          var(--primary),
+          var(--accent)
+        );
         background-size: 200% auto;
         background-clip: text;
         -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         animation: shimmer 3s linear infinite;
         font-family: "Righteous", cursive;
-        font-size: 3em;
+        font-size: 2.8em;
         text-shadow: 0 0 25px rgba(255, 102, 204, 0.8);
         margin: 0;
-        clip-path: polygon(2% 0, 100% 0, 98% 100%, 0 100%);
+        letter-spacing: 1px;
       }
 
       p {
-        color: #e0e0e0;
+        color: var(--text-light);
         font-family: "Quicksand", sans-serif;
-        font-size: 1.2em;
+        font-size: 1em;
         margin: 5px 0 0;
-        clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+        font-weight: 700;
+        letter-spacing: 0.5px;
       }
 
       @keyframes shimmer {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 200% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 200% 50%;
+        }
       }
 
       .music-notes {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        height: 100%;
-        overflow: hidden;
+        height: 100vh;
         pointer-events: none;
         z-index: -1;
       }
@@ -137,76 +201,220 @@
       .music-note {
         position: absolute;
         color: rgba(255, 153, 204, 0.4);
-        font-size: 1.8em;
+        font-size: 1.5em;
         animation: float 8s linear infinite;
       }
 
       @keyframes float {
-        0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-        15% { opacity: 1; }
-        85% { opacity: 1; }
-        100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        85% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) rotate(720deg);
+          opacity: 0;
+        }
       }
 
-      .controls {
+      .left-panel,
+      .right-panel {
+        width: var(--panel-width);
+        background: rgba(30, 15, 60, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 18px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 15px;
-        justify-content: center;
+      }
+
+      .controls-section {
         background: rgba(153, 102, 255, 0.2);
-        padding: 20px;
-        border-radius: 20px;
-        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 12px;
+        flex-grow: 0; /* Prevent stretching */
+      }
+
+      .section-title {
+        margin: 0 0 12px;
+        color: white;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 8px;
+      }
+
+      .text-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .control-row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .control-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .control-row button,
+      .control-row select {
+        flex: 1;
+        height: var(--button-height);
+        min-width: 0;
+      }
+
+      .format-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .format-buttons button {
+        height: var(--button-height);
+        padding: 0 10px;
+        font-size: 0.9em;
       }
 
       button,
       select {
-        padding: 12px 25px;
+        height: var(--button-height);
+        padding: 0 15px;
         border: none;
-        border-radius: 50px;
-        background: linear-gradient(45deg, #9966ff, #ff66cc, #33ccff);
+        border-radius: 25px;
+        background: linear-gradient(
+          45deg,
+          var(--primary),
+          var(--secondary),
+          var(--accent)
+        );
         background-size: 200% auto;
         color: #fff;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 0 20px rgba(153, 102, 255, 0.6);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         font-weight: 700;
+        font-family: "Quicksand", sans-serif;
+        white-space: nowrap;
+        font-size: 0.95em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       button:hover,
       select:hover {
-        transform: translateY(-5px) scale(1.1);
-        box-shadow: 0 0 30px rgba(255, 102, 204, 0.9);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3),
+          0 0 20px rgba(255, 102, 204, 0.5);
         background-position: right center;
       }
 
+      button:active,
+      select:active {
+        transform: translateY(-1px);
+      }
+
       input[type="text"] {
-        width: 200px;
-        padding: 12px 22px;
+        width: 100%;
+        height: var(--button-height);
+        padding: 0 15px;
         border: none;
-        border-radius: 30px;
+        border-radius: 20px;
         background: rgba(255, 255, 255, 0.1);
         color: white;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+        font-family: "Quicksand", sans-serif;
+        font-size: 0.95em;
+        transition: all 0.3s ease;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        box-shadow: 0 0 12px rgba(153, 102, 255, 0.6);
+        background: rgba(255, 255, 255, 0.2);
       }
 
       input[type="text"]::placeholder {
         color: rgba(255, 255, 255, 0.6);
       }
 
-      .lyrics-box {
-        height: 400px; /* Fixed height instead of min-height */
-        max-height: 400px; /* Ensure it doesn't grow beyond this */
-        background: rgba(255, 255, 255, 0.08);
-        padding: 30px;
+      .lyrics-container {
+        flex: 1;
         border-radius: 15px;
-        overflow-y: auto; /* This is correct - keeps the scrollbar when needed */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        min-width: 300px; /* Ensure minimum width */
+      }
+
+      .lyrics-header {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        padding: 12px 20px;
+        border-radius: 15px 15px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .lyrics-title {
+        font-weight: 700;
+        font-size: 1.2em;
+        margin: 0;
+      }
+
+      #statusIndicator {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.9em;
+      }
+
+      .lyrics-box {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 0 0 15px 15px;
         white-space: pre-wrap;
         word-wrap: break-word;
-        line-height: 1.8;
+        line-height: 1.6;
         font-size: 1.1em;
-        box-shadow: inset 0 0 20px rgba(106, 90, 205, 0.2);
+        box-shadow: inset 0 0 15px rgba(106, 90, 205, 0.2);
         position: relative;
+        overflow-y: auto; /* Allow scrolling within lyrics */
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) rgba(0, 0, 0, 0.2);
+      }
+
+      .lyrics-box::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .lyrics-box::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+      }
+
+      .lyrics-box::-webkit-scrollbar-thumb {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border-radius: 5px;
+      }
+
+      .lyrics-box:focus {
+        outline: none;
+        box-shadow: inset 0 0 25px rgba(153, 102, 255, 0.4);
       }
 
       .lyrics-box:empty::before {
@@ -216,12 +424,11 @@
         pointer-events: none;
       }
 
-
       .scrolling-indicator {
         position: absolute;
         right: 15px;
         bottom: 15px;
-        background: rgba(106, 90, 205, 0.3);
+        background: rgba(106, 90, 205, 0.6);
         border-radius: 50%;
         width: 40px;
         height: 40px;
@@ -230,82 +437,328 @@
         align-items: center;
         color: #fff;
         animation: fadeInOut 1.5s ease-in-out infinite;
+        font-size: 1.1em;
+        box-shadow: 0 0 15px rgba(153, 102, 255, 0.6);
       }
 
       @keyframes fadeInOut {
-        0%, 100% { opacity: 0.3; }
-        50% { opacity: 0.8; }
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.9;
+        }
       }
 
-      ::-webkit-scrollbar {
-        width: 12px;
+      .quick-controls {
+        position: absolute;
+        bottom: 15px;
+        right: 65px;
+        display: flex;
+        gap: 10px;
+        z-index: 99;
       }
 
-      ::-webkit-scrollbar-thumb {
-        background: linear-gradient(45deg, #9966ff, #ff66cc);
-        border-radius: 12px;
+      .quick-controls button {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        border-radius: 50%;
       }
 
       .footer {
         position: fixed;
-        bottom: 20px;
+        bottom: 15px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1em;
+        gap: 10px;
+        padding: 10px 18px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 25px;
+        backdrop-filter: blur(5px);
+        z-index: 5;
       }
 
       .footer h3 {
-        color: #e0e0e0;
+        color: var(--text-light);
         font-family: "Quicksand", sans-serif;
         font-size: 0.9em;
         margin: 0;
-        text-shadow: 0 0 10px rgba(255, 153, 204, 0.5);
+        text-shadow: 0 0 8px rgba(255, 153, 204, 0.5);
       }
 
       .footer-logo {
-        width: 30px;
-        height: 30px;
-        filter: drop-shadow(0 0 8px rgba(255, 153, 204, 0.7));
+        width: 25px;
+        height: 25px;
+        filter: drop-shadow(0 0 6px rgba(255, 153, 204, 0.7));
         transition: transform 0.3s ease;
       }
 
       .footer-logo:hover {
-        transform: scale(1.2);
+        transform: rotate(360deg) scale(1.2);
+        transition: transform 0.6s ease;
+      }
+
+      .tooltip {
+        position: relative;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+        font-size: 0.8em;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .floating-button {
+        position: fixed;
+        right: 25px;
+        bottom: 70px;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 20;
+      }
+
+      .floating-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
+          0 0 25px rgba(255, 102, 204, 0.5);
+      }
+
+      .top-button-icon {
+        font-size: 22px;
+        color: white;
+      }
+
+      @media (max-width: 1100px) {
+        .container {
+          flex-direction: column;
+          margin-top: 80px;
+          padding: 20px;
+          height: calc(100vh - 120px);
+          gap: 15px;
+        }
+        .left-panel,
+        .right-panel {
+          width: 100%;
+          height: auto;
+          padding: 15px;
+        }
+        .format-buttons {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .lyrics-box {
+          padding: 15px;
+        }
+        .title-wrapper {
+          width: 240px;
+          top: -60px;
+          padding: 10px 20px;
+        }
+        h1 {
+          font-size: 2.2em;
+        }
+        p {
+          font-size: 0.9em;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 15px;
+          margin-top: 70px;
+        }
+        .format-buttons {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .controls-section {
+          padding: 12px;
+        }
+        .title-wrapper {
+          width: 220px;
+        }
+        h1 {
+          font-size: 2em;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="music-notes"></div>
+    <div class="music-notes" id="musicNotes"></div>
     <div class="container">
       <div class="title-wrapper">
         <img src="./fox.svg" id="foximg" alt="Fox Logo" />
         <h1>Magic Lyrics</h1>
         <p>Lyrics Auto Scroller</p>
       </div>
-      <div class="controls">
-        <input type="text" id="songTitle" placeholder="✨ Song Title" />
-        <input type="text" id="artistName" placeholder="🎤 Artist Name" />
-        <button id="scrollButton">Play/Pause Scroll</button>
-        <select id="scrollSpeed" onchange="updateSpeed()">
-          <option value="1">Slow 🎶</option>
-          <option value="2" selected>Medium 🎵</option>
-          <option value="3">Fast 🎸</option>
-        </select>
-        <button onclick="formatText('bold')">Bold</button>
-        <button onclick="formatText('italic')">Italic</button>
-        <button onclick="formatText('justifyLeft')">Left</button>
-        <button onclick="formatText('justifyCenter')">Center</button>
-        <button onclick="formatText('justifyRight')">Right</button>
-        <button onclick="document.getElementById('fileInput').click()">Open File</button>
-        <input type="file" id="fileInput" style="display: none" accept=".txt,.mag,.md" onchange="openFile(event)" />
-        <button id="saveButton" onclick="saveLyrics()">Save Lyrics</button>
+
+      <div class="left-panel">
+        <div class="controls-section">
+          <h3 class="section-title">Song Information</h3>
+          <div class="text-inputs">
+            <input type="text" id="songTitle" placeholder="✨ Song Title" />
+            <input type="text" id="artistName" placeholder="🎤 Artist Name" />
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <h3 class="section-title">File Operations</h3>
+          <div class="control-row">
+            <button
+              id="fileinput"
+              onclick="document.getElementById('fileInput').click()"
+              class="tooltip"
+            >
+              Open File
+              <span class="tooltiptext">Load lyrics from file</span>
+            </button>
+            <button id="saveButton" onclick="saveLyrics()" class="tooltip">
+              Save Lyrics
+              <span class="tooltiptext">Save lyrics to file</span>
+            </button>
+          </div>
+          <input
+            type="file"
+            id="fileInput"
+            style="display: none"
+            accept=".txt,.mag,.md"
+            onchange="openFile(event)"
+          />
+        </div>
       </div>
-      <div contenteditable="true" class="lyrics-box" id="lyrics" data-placeholder="✨ Paste your lyrics here and watch them glow... ✨">
+
+      <div class="lyrics-container">
+        <div class="lyrics-header">
+          <h3 class="lyrics-title">Your Lyrics</h3>
+          <div id="statusIndicator">Ready</div>
+        </div>
+        <div
+          contenteditable="true"
+          class="lyrics-box"
+          id="lyrics"
+          data-placeholder="✨ Paste your lyrics here and watch them glow... ✨"
+        ></div>
         <div class="scrolling-indicator" id="scrollIndicator">▼</div>
+        <div class="quick-controls">
+          <button
+            id="quickScrollButton"
+            onclick="toggleScroll()"
+            class="tooltip"
+          >
+            ▶
+            <span class="tooltiptext">Play/Pause</span>
+          </button>
+          <button id="quickFormatButton" class="tooltip">
+            Aa
+            <span class="tooltiptext">Format</span>
+          </button>
+        </div>
       </div>
+
+      <div class="right-panel">
+        <div class="controls-section">
+          <h3 class="section-title">Scrolling</h3>
+          <div class="control-row">
+            <button id="scrollButton" class="tooltip">
+              Play/Pause
+              <span class="tooltiptext">Start or stop auto-scrolling</span>
+            </button>
+            <select id="scrollSpeed" onchange="updateSpeed()" class="tooltip">
+              <option value="1">Slow 🎶</option>
+              <option value="2" selected>Medium 🎵</option>
+              <option value="3">Fast 🎸</option>
+              <option value="4">Very Fast 🚀</option>
+              <span class="tooltiptext">Adjust scrolling speed</span>
+            </select>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <h3 class="section-title">Text Formatting</h3>
+          <div class="control-row">
+            <select id="fontSize" onchange="updateFontSize()" class="tooltip">
+              <option value="0.9">Small</option>
+              <option value="1.1" selected>Normal</option>
+              <option value="1.3">Large</option>
+              <option value="1.5">X-Large</option>
+              <span class="tooltiptext">Change text size</span>
+            </select>
+          </div>
+          <div class="format-buttons">
+            <button onclick="formatText('bold')" class="tooltip">
+              Bold
+              <span class="tooltiptext">Make text bold</span>
+            </button>
+            <button onclick="formatText('italic')" class="tooltip">
+              Italic
+              <span class="tooltiptext">Make text italic</span>
+            </button>
+            <button onclick="formatText('justifyLeft')" class="tooltip">
+              Left
+              <span class="tooltiptext">Align text left</span>
+            </button>
+            <button onclick="formatText('justifyCenter')" class="tooltip">
+              Center
+              <span class="tooltiptext">Align text center</span>
+            </button>
+            <button onclick="formatText('justifyRight')" class="tooltip">
+              Right
+              <span class="tooltiptext">Align text right</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <h3 class="section-title">Options</h3>
+          <div class="control-row">
+            <button id="clearButton" onclick="clearLyrics()" class="tooltip">
+              Clear All
+              <span class="tooltiptext">Clear all text</span>
+            </button>
+            <button id="themeToggle" onclick="toggleTheme()" class="tooltip">
+              Toggle Theme
+              <span class="tooltiptext">Switch light/dark mode</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-button" id="scrollToTop" onclick="scrollToTop()">
+      <span class="top-button-icon">↑</span>
+    </div>
 
     <div class="footer">
       <h3>Made by Artechfuz3d</h3>
@@ -313,185 +766,234 @@
         <img src="./logoswirl.svg" alt="ArtechFuz3D Logo" class="footer-logo" />
       </a>
     </div>
-  </div>
-  <script>
-    let scrolling = false;
-    let scrollInterval;
-    const lyricsBox = document.getElementById("lyrics");
-    let scrollButton; // Define globally
-    let scrollIndicator; // Define globally
-  
-    // Clean pasted text
-    lyricsBox.addEventListener("paste", (e) => {
-      e.preventDefault();
-      const text = (e.clipboardData || window.clipboardData).getData("text/plain");
-      const cleanText = text.replace(/[^\x20-\x7E\n]/g, "").trim();
-      document.execCommand("insertText", false, cleanText);
-    });
-  
-    // Toggle scroll functionality
-    function toggleScroll() {
-      console.log("toggleScroll called, scrolling:", scrolling);
-  
-      // No need to re-fetch elements; use global references
-      if (!scrollButton || !scrollIndicator) {
-        console.error("Required DOM elements not found: scrollButton or scrollIndicator");
-        return;
-      }
-  
-      if (!scrolling) {
-        if (lyricsBox.scrollHeight <= lyricsBox.clientHeight || !lyricsBox.textContent.trim()) {
-          alert("Please add more lyrics to enable scrolling");
+
+
+    <script>
+      let scrolling = false;
+      let scrollInterval;
+      const lyricsBox = document.getElementById("lyrics");
+      let scrollButton;
+      let scrollIndicator;
+
+      // Clean pasted text
+      lyricsBox.addEventListener("paste", (e) => {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData(
+          "text/plain"
+        );
+        const cleanText = text.replace(/[^\x20-\x7E\n]/g, "").trim();
+        document.execCommand("insertText", false, cleanText);
+      });
+
+      // Toggle scroll functionality
+      function toggleScroll() {
+        console.log("toggleScroll called, scrolling:", scrolling);
+
+        if (!scrollButton || !scrollIndicator) {
+          console.error(
+            "Required DOM elements not found: scrollButton or scrollIndicator"
+          );
           return;
         }
-  
-        console.log("Starting scroll...");
-        scrollButton.textContent = "Pause Scroll";
-        scrollButton.style.background = "linear-gradient(45deg, #FF6B6B, #FF8E53)";
-        scrollIndicator.style.display = "flex";
-        startScroll();
-        scrolling = true;
-      } else {
-        console.log("Stopping scroll...");
-        scrollButton.textContent = "Play Scroll";
-        scrollButton.style.background = "";
-        scrollIndicator.style.display = "none";
-        stopScroll();
-        scrolling = false;
-      }
-    }
-  
-    // Start scrolling
-    function startScroll() {
-      const speed = parseInt(document.getElementById("scrollSpeed").value);
-      stopScroll(); // Clear any existing interval
-      console.log("startScroll called with speed:", speed);
-  
-      scrollInterval = setInterval(() => {
-        console.log("Scrolling... scrollTop:", lyricsBox.scrollTop, "scrollHeight:", lyricsBox.scrollHeight);
-        lyricsBox.scrollTop += speed;
-  
-        if (lyricsBox.scrollTop >= lyricsBox.scrollHeight - lyricsBox.clientHeight - 10) {
-          lyricsBox.scrollTop = 0;
-          console.log("Reset to top");
+
+        if (!scrolling) {
+          if (
+            lyricsBox.scrollHeight <= lyricsBox.clientHeight ||
+            !lyricsBox.textContent.trim()
+          ) {
+            alert("Please add more lyrics to enable scrolling");
+            return;
+          }
+
+          console.log("Starting scroll...");
+          scrollButton.textContent = "Pause Scroll";
+          scrollButton.style.background =
+            "linear-gradient(45deg, #FF6B6B, #FF8E53)";
+          scrollIndicator.style.display = "flex";
+          startScroll();
+          scrolling = true;
+        } else {
+          console.log("Stopping scroll...");
+          scrollButton.textContent = "Play Scroll";
+          scrollButton.style.background = "";
+          scrollIndicator.style.display = "none";
+          stopScroll();
+          scrolling = false;
         }
-      }, 150);
-    }
-  
-    // Stop scrolling
-    function stopScroll() {
-      console.log("stopScroll called");
-      if (scrollInterval) {
-        clearInterval(scrollInterval);
-        scrollInterval = null;
       }
-    }
-  
-    // Update scroll speed
-    function updateSpeed() {
-      console.log("updateSpeed called");
-      if (scrolling) {
-        startScroll();
-      }
-    }
-  
-    // Format text
-    function formatText(command) {
-      document.execCommand(command, false, null);
-      lyricsBox.focus();
-    }
-  
-    // Save lyrics with formatting information
-    function saveLyrics() {
-      const songTitle = document.getElementById("songTitle").value || "Untitled";
-      const artistName = document.getElementById("artistName").value || "Unknown";
-      const formattedContent = lyricsBox.innerHTML;
-      const saveData = { title: songTitle, artist: artistName, content: formattedContent, version: "1.0" };
-      const jsonContent = JSON.stringify(saveData);
-      const blob = new Blob([jsonContent], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `${artistName} - ${songTitle}.mag`;
-      link.click();
-      const saveButton = document.getElementById("saveButton");
-      saveButton.style.background = "#4CAF50";
-      saveButton.textContent = "Saved! ✓";
-      setTimeout(() => {
-        saveButton.style.background = "";
-        saveButton.textContent = "Save Lyrics";
-      }, 2000);
-    }
-  
-    // Open file with preserved formatting
-    function openFile(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      if (file.name.endsWith(".mag")) {
-        reader.onload = (e) => {
-          try {
-            const saveData = JSON.parse(e.target.result);
-            document.getElementById("songTitle").value = saveData.title || "";
-            document.getElementById("artistName").value = saveData.artist || "";
-            lyricsBox.innerHTML = saveData.content;
-          } catch (error) {
-            console.error("Error parsing file:", error);
-            alert("Could not open file. The file may be corrupted.");
+
+      // Start scrolling with integer speeds
+      function startScroll() {
+        const speed = parseInt(document.getElementById("scrollSpeed").value); // Back to integers
+        stopScroll(); // Clear any existing interval
+        console.log("startScroll called with speed:", speed);
+
+        scrollInterval = setInterval(() => {
+          console.log(
+            "Scrolling... scrollTop:",
+            lyricsBox.scrollTop,
+            "scrollHeight:",
+            lyricsBox.scrollHeight
+          );
+          lyricsBox.scrollTop += speed; // Integer increments: 1, 2, 3, 4
+
+          if (
+            lyricsBox.scrollTop >=
+            lyricsBox.scrollHeight - lyricsBox.clientHeight - 10
+          ) {
+            lyricsBox.scrollTop = 0;
+            console.log("Reset to top");
           }
+        }, 50); // 50ms interval for smooth scrolling
+      }
+
+      // Stop scrolling
+      function stopScroll() {
+        console.log("stopScroll called");
+        if (scrollInterval) {
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+        }
+      }
+
+      // Update scroll speed
+      function updateSpeed() {
+        console.log("updateSpeed called");
+        if (scrolling) {
+          startScroll();
+        }
+      }
+
+      // Font Size
+      function updateFontSize() {
+        const fontSizeSelect = document.getElementById("fontSize");
+        const lyricsBox = document.getElementById("lyrics");
+        const size = fontSizeSelect.value;
+        lyricsBox.style.fontSize = `${size}em`;
+      }
+
+      // Format text
+      function formatText(command) {
+        document.execCommand(command, false, null);
+        lyricsBox.focus();
+      }
+
+      // Save lyrics with formatting information
+      function saveLyrics() {
+        const songTitle =
+          document.getElementById("songTitle").value || "Untitled";
+        const artistName =
+          document.getElementById("artistName").value || "Unknown";
+        const formattedContent = lyricsBox.innerHTML;
+        const saveData = {
+          title: songTitle,
+          artist: artistName,
+          content: formattedContent,
+          version: "1.0",
         };
-        reader.readAsText(file);
-      } else {
-        reader.onload = (e) => {
-          const text = e.target.result;
-          const lines = text.split("\n");
-          if (lines[0].includes(" - ")) {
-            const [title, artist] = lines[0].split(" - ");
-            document.getElementById("songTitle").value = title.trim();
-            document.getElementById("artistName").value = artist.trim();
-            lyricsBox.textContent = lines.slice(2).join("\n");
-          } else {
-            lyricsBox.textContent = text;
-          }
-        };
-        reader.readAsText(file);
+        const jsonContent = JSON.stringify(saveData);
+        const blob = new Blob([jsonContent], { type: "application/json" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${artistName} - ${songTitle}.mag`;
+        link.click();
+        const saveButton = document.getElementById("saveButton");
+        saveButton.style.background = "#4CAF50";
+        saveButton.textContent = "Saved! ✓";
+        setTimeout(() => {
+          saveButton.style.background = "";
+          saveButton.textContent = "Save Lyrics";
+        }, 2000);
       }
-    }
-  
-    // Floating music notes
-    function createMusicNotes() {
-      const notes = ["♪", "♫", "♩", "♬", "🎵", "🎶"];
-      const musicNotesContainer = document.querySelector(".music-notes");
-      for (let i = 0; i < 20; i++) {
-        const note = document.createElement("div");
-        note.className = "music-note";
-        note.textContent = notes[Math.floor(Math.random() * notes.length)];
-        const left = Math.random() * 100;
-        const delay = Math.random() * 10;
-        const duration = 10 + Math.random() * 20;
-        note.style.left = `${left}%`;
-        note.style.animationDelay = `${delay}s`;
-        note.style.animationDuration = `${duration}s`;
-        musicNotesContainer.appendChild(note);
+
+      // Open file with preserved formatting
+      function openFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        if (file.name.endsWith(".mag")) {
+          reader.onload = (e) => {
+            try {
+              const saveData = JSON.parse(e.target.result);
+              document.getElementById("songTitle").value = saveData.title || "";
+              document.getElementById("artistName").value =
+                saveData.artist || "";
+              lyricsBox.innerHTML = saveData.content;
+            } catch (error) {
+              console.error("Error parsing file:", error);
+              alert("Could not open file. The file may be corrupted.");
+            }
+          };
+          reader.readAsText(file);
+        } else {
+          reader.onload = (e) => {
+            const text = e.target.result;
+            const lines = text.split("\n");
+            if (lines[0].includes(" - ")) {
+              const [title, artist] = lines[0].split(" - ");
+              document.getElementById("songTitle").value = title.trim();
+              document.getElementById("artistName").value = artist.trim();
+              lyricsBox.textContent = lines.slice(2).join("\n");
+            } else {
+              lyricsBox.textContent = text;
+            }
+          };
+          reader.readAsText(file);
+        }
       }
-    }
-  
-    // Initialize when DOM is fully loaded
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("DOM fully loaded");
-      createMusicNotes();
-      scrollButton = document.getElementById("scrollButton"); // Assign globally
-      scrollIndicator = document.getElementById("scrollIndicator"); // Assign globally
-      if (scrollButton) {
-        scrollButton.addEventListener("click", toggleScroll);
-        console.log("Scroll button listener attached");
-      } else {
-        console.error("scrollButton not found during initialization");
+
+      // Floating music notes
+      function createMusicNotes() {
+        const notes = ["♪", "♫", "♩", "♬", "🎵", "🎶"];
+        const musicNotesContainer = document.querySelector(".music-notes");
+        for (let i = 0; i < 20; i++) {
+          const note = document.createElement("div");
+          note.className = "music-note";
+          note.textContent = notes[Math.floor(Math.random() * notes.length)];
+          const left = Math.random() * 100;
+          const delay = Math.random() * 10;
+          const duration = 10 + Math.random() * 20;
+          note.style.left = `${left}%`;
+          note.style.animationDelay = `${delay}s`;
+          note.style.animationDuration = `${duration}s`;
+          musicNotesContainer.appendChild(note);
+        }
       }
-      if (!scrollIndicator) {
-        console.error("scrollIndicator not found during initialization");
+
+      // Scroll to top
+      function scrollToTop() {
+        lyricsBox.scrollTop = 0;
       }
-    });
-  </script>
+
+      // Toggle theme (placeholder)
+      function toggleTheme() {
+        document.body.classList.toggle("light-theme");
+      }
+
+      // Clear lyrics
+      function clearLyrics() {
+        if (confirm("Are you sure you want to clear all lyrics?")) {
+          lyricsBox.innerHTML = "";
+        }
+      }
+
+      // Initialize when DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM fully loaded");
+        createMusicNotes();
+        scrollButton = document.getElementById("scrollButton");
+        scrollIndicator = document.getElementById("scrollIndicator");
+        if (scrollButton) {
+          scrollButton.addEventListener("click", toggleScroll);
+          console.log("Scroll button listener attached");
+        } else {
+          console.error("scrollButton not found during initialization");
+        }
+        if (!scrollIndicator) {
+          console.error("scrollIndicator not found during initialization");
+        }
+        updateFontSize();
+      });
+    </script>
   </body>
 </html>
-
