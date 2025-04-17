@@ -179,6 +179,33 @@
         }
       }
 
+      #foximg {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px;
+        filter: drop-shadow(0 0 8px rgba(255, 153, 204, 0.7));
+        transition: transform 0.3s ease;
+      }
+
+      #foximg.iconify {
+        font-size: 40px;
+        line-height: 40px;
+        display: inline-block;
+        color: var(--text-light);
+      }
+
+      [data-theme="scifi"] #foximg {
+        filter: drop-shadow(0 0 8px rgba(0, 221, 235, 0.7));
+      }
+
+      [data-theme="metal"] #foximg {
+        filter: drop-shadow(0 0 8px rgba(255, 26, 26, 0.7));
+      }
+
+      #foximg:hover {
+        transform: rotate(15deg);
+      }
+
       h1 {
         color: #fff;
         background: linear-gradient(
@@ -762,6 +789,7 @@
     <div class="music-notes" id="musicNotes"></div>
     <div class="container">
       <div class="title-wrapper">
+        <div id="foximg"></div>
         <h1>Magic Lyrics</h1>
         <p>Lyrics Auto Scroller</p>
       </div>
@@ -924,16 +952,25 @@
         {
           name: "pink",
           title: "Magic Lyrics 🎸",
+          logo: "./fox.svg",
+          logoType: "svg",
+          alt: "Fox Logo",
           icon: "mdi:palette",
         },
         {
           name: "scifi",
           title: "Neon Lyrics 🚀",
+          logo: "mdi:rocket",
+          logoType: "iconify",
+          alt: "Rocket Logo",
           icon: "mdi:rocket",
         },
         {
           name: "metal",
           title: "Rage Lyrics 🤘",
+          logo: "mdi:skull",
+          logoType: "iconify",
+          alt: "Skull Logo",
           icon: "mdi:skull",
         },
       ];
@@ -1153,7 +1190,23 @@
         const theme = themes[currentThemeIndex];
         document.body.setAttribute("data-theme", theme.name);
         document.title = theme.title;
-        document.querySelector(".title-wrapper h1").textContent = theme.title;
+
+        const foxImg = document.getElementById("foximg");
+        foxImg.innerHTML = "";
+        if (theme.logoType === "svg") {
+          const img = document.createElement("img");
+          img.src = theme.logo;
+          img.alt = theme.alt;
+          img.id = "foximg";
+          foxImg.appendChild(img);
+        } else if (theme.logoType === "iconify") {
+          const span = document.createElement("span");
+          span.className = "iconify";
+          span.setAttribute("data-icon", theme.logo);
+          span.id = "foximg";
+          foxImg.appendChild(span);
+        }
+
         document
           .querySelector("#themeToggle .iconify")
           .setAttribute("data-icon", theme.icon);
@@ -1183,10 +1236,16 @@
         }
         updateFontSize();
 
-46
-        // Set initial title
+        // Set initial logo
+        const foxImg = document.getElementById("foximg");
         const initialTheme = themes[currentThemeIndex];
-        document.querySelector(".title-wrapper h1").textContent = initialTheme.title;
+        if (initialTheme.logoType === "svg") {
+          const img = document.createElement("img");
+          img.src = initialTheme.logo;
+          img.alt = initialTheme.alt;
+          img.id = "foximg";
+          foxImg.appendChild(img);
+        }
       });
     </script>
   </body>
