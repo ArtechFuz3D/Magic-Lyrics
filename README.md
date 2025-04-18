@@ -2,7 +2,11 @@
 
 ### Scroll through your favorite song lyrics effortlessly with this auto-scrolling tool!
 
-![preview](./previewv2.png)
+![Magic Lyrics - Default Theme](./preview3-pink.png)
+
+![Neon Lyrics - Space Theme](./preview3-neon.png)
+
+![Rage Lyrics - Rock Theme](./preview3-rock.png)
 <!-- ![preview](./previewv2.png) -->
 
 ## Guide
